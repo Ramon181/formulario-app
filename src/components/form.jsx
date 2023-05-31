@@ -22,10 +22,6 @@ const Form = () => {
             .then((response) => {
                 setCountries(response.data);
             })
-            .catch((error) => {
-                console.error(error);
-            });
-
     }, []);
 
     const handleChange = (e) => {
@@ -35,10 +31,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
-            name: formData.firstName + " " + formData.secondName,
-            country: formData.country
-        }
+
         if (!formData.firstName) {
             setError("Por favor llene los campos")
             setToastError(true)
@@ -51,22 +44,22 @@ const Form = () => {
             setError("Por favor llene los campos")
             setToastError(true)
         } else {
+            const data = {
+                name: formData.firstName + " " + formData.secondName,
+                country: formData.country
+            }
             axios
                 .post("http://localhost:3001/form", data)
                 .then((response) => {
-                    console.log(response.data);
+                    return response.data;
                 })
-                .catch((error) => {
-                    console.error(error);
-                    // Manejo de errores
-                });
             setError("")
             setToastError(false);
             setSuccess("Los dataos fueron guardados")
             setToastSuccess(true);
             setFormData({
-                firstName:"",
-                secondName:"",
+                firstName: "",
+                secondName: "",
                 country: ""
             })
         }
@@ -75,7 +68,7 @@ const Form = () => {
 
     return (
         <div className="main_form" >
-            <form onSubmit={handleSubmit} class='login-form'>
+            <form onSubmit={handleSubmit} className='login-form'>
                 {
                     toastError ? (
                         <div className="toast_error">
@@ -154,28 +147,28 @@ const Form = () => {
                     ) : null
                 }
 
-                <div class="flex-row">
-                    <label class="lf--label" for="first_name">
+                <div className="flex-row">
+                    <label className="lf--label" htmlFor="first_name">
                         Nombre
                     </label>
-                    <input id="first_name" value={formData.firstName} onChange={handleChange} name="firstName" class='lf--input' placeholder='Nombre' type='text' />
-                </div>
-                <div class="flex-row">
-                    <label class="lf--label" for="second_name">
-                        Apellido
-                    </label>
-                    <input id="second_name" value={formData.secondName} name="secondName" class='lf--input' placeholder='Apellido' type='text' />
+                    <input id="first_name" value={formData.firstName} onChange={handleChange} name="firstName" className='lf--input' placeholder='Nombre' type='text' />
                 </div>
                 <div className="flex-row">
-                    <label class="lf--label" for="slct">
+                    <label className="lf--label" htmlFor="second_name">
+                        Apellido
+                    </label>
+                    <input id="second_name" value={formData.secondName} onChange={handleChange} name="secondName" className='lf--input' placeholder='Apellido' type='text' />
+                </div>
+                <div className="flex-row">
+                    <label className="lf--label" htmlFor="slct">
                         Pais
                     </label>
-                    <label class="select" for="slct">
+                    <label className="select" htmlFor="slct">
                         <select value={formData.country} id="slct" name="country" onChange={handleChange}>
-                            <option value="" disabled="disabled" selected="selected">Seleccionar Pais</option>
+                            <option value="" disabled="disabled">Seleccionar Pais</option>
                             {
-                                countries && countries.map(e => (
-                                    <option key={e.id} value={e.nativeName}>{e.name}</option>
+                                countries && countries.map((e, index) => (
+                                    <option key={index} value={e.name}>{e.name}</option>
                                 ))
                             }
                         </select>
@@ -183,36 +176,14 @@ const Form = () => {
                             <use href="#select-arrow-down"></use>
                         </svg>
                     </label>
-                    <svg class="sprites">
-                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                    <svg className="sprites">
+                        <symbol id="select-arrow-down" viewBox="0 0 10 6">
                             <polyline points="1 1 5 5 9 1"></polyline>
                         </symbol>
                     </svg>
                 </div>
-                <input class='lf--submit' type='submit' value='Guardar' />
+                <input className='lf--submit' type='submit' value='Guardar' />
             </form>
-            {/* <h1>Formulario</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Nombre completo:
-                    <input type="text" name="name" required onChange={handleChange} />
-                </label>
-                <br />
-                <label>
-                    País:
-                    <select name="country" required onChange={handleChange}>
-                        <option value="">Seleccione un país</option>
-                        {countries &&
-                            countries.map((country) => (
-                                <option key={country.id} value={country.id}>
-                                    {country.nativeName}
-                                </option>
-                            ))}
-                    </select>
-                </label>
-                <br />
-                <button type="submit">Enviar</button>
-            </form> */}
         </div>
     )
 }
