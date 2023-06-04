@@ -12,7 +12,7 @@ const List = () => {
     const fetchFormulario = async () => {
         
         await axios
-            .get("http://localhost:3001/form")
+            .get("https://endless-bolt-388502-service-zg2tz3mrfq-rj.a.run.app/")
             .then((response) => {
                 const users = response.data;
                 setUsuarios(users);
@@ -26,7 +26,7 @@ const List = () => {
     }, []);
 
     const handlerDelete = (id, index) => {
-        axios.delete(`http://localhost:3001/form/${id}`)
+        axios.delete(`https://endless-bolt-388502-service-zg2tz3mrfq-rj.a.run.app/form/${id}`)
             .then(response => {
                 const message = response.data.message;
                 setSuccess(message);
@@ -97,7 +97,7 @@ const List = () => {
                                         <th>Numero</th>
                                         <th>Nombre</th>
                                         <th>Pais</th>
-                                        <th>Accion</th>
+                                        <th>Acción</th>
                                     </tr >
                                 </thead >
                             </table >

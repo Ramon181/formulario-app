@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 const Nav = () => {
     return (
         <nav className="nav_body">
-            <div className="tile_nav">
+            <Link to={"/"} className="tile_nav">
                 <h2>Formulario App</h2>
-            </div>
+            </Link>
             <ul className="links_nav">
                 <li className="link_nav">
                     <Link to={"/"} href="#!">Formulario</Link>

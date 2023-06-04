@@ -28,6 +28,12 @@ body {
 
 .tile_nav {
   padding-left: 15px;
+  text-decoration: none;
+  color: #c4c4c4;
+}
+
+.tile_nav:hover {
+  color: aliceblue;
 }
 
 .links_nav {
@@ -471,6 +477,7 @@ section {
   height: 48px;
   border: 5px solid #fff;
   border-bottom-color: transparent;
+  margin: auto;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;

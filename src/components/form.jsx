@@ -49,7 +49,7 @@ const Form = () => {
                 country: formData.country
             }
             axios
-                .post("http://localhost:3001/form", data)
+                .post("https://endless-bolt-388502-service-zg2tz3mrfq-rj.a.run.app/", data)
                 .then((response) => {
                     return response.data;
                 })
